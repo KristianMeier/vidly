@@ -18,9 +18,15 @@ class Counter extends Component {
     );
   }
 
-  handleIncrement() {
-    console.group("Increment Clicked");
-  }
+  // Dette er et workaround til at man kan bruge "this" som et enkeltstående objekt. Uuden dette får man undefined.
+  // constructor() {
+  //   super();
+  //   this.handleIncrement = this.handleIncrement.bind(this);
+  // }
+
+  handleIncrement = () => {
+    console.group("Increment Clicked", this);
+  };
 
   render() {
     return (
@@ -29,7 +35,7 @@ class Counter extends Component {
         {this.renderTags()}
         <span className={this.getBudgeClasses()}>{this.formatCount()}</span>
         <button
-          onClick={this.handleIncrement}
+          onClick={this.handleIncrement} //Denne method kaldes ikke. Det er blot en reference. Modsat Vanilla Javascript.
           className="btn bton-secondary btn-sm"
         >
           {"Icrement"}
